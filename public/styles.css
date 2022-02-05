@@ -1,0 +1,21 @@
+#login, #loggedin {
+  display: none;
+}
+
+.cropped {
+  width: 40px; 
+  height: 40px; 
+  object-fit: cover;
+  border-radius: 50%;
+  }
+
+.profile-name {
+  position: fixed;
+    top: 20px;
+    right: 30px;
+    z-index: 9999;
+}
+
+li {
+  cursor: pointer
+}
