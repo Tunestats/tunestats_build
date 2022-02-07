@@ -24,32 +24,40 @@
   </head>
 
   <body onload="start()">
-    <div class="container-fluid">
-
+      
+    <div id="login" class="text-center">
       </br>
+      <h1>Test App</h1>
+      <a href="/login" class="btn btn-success btn-lg">Log in with Spotify</a>
+    </div>
+
+    <div id="loggedin">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Test App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" onclick="track()">Top Tracks</a>
+              <a class="nav-link" onclick="artist()"href="#">Top Artists</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+        
+      <div class="container-fluid">
       
-      <div id="login" class="text-center">
-        <h1>Test App</h1>
-        <a href="/login" class="btn btn-success btn-lg">Log in with Spotify</a>
-      </div>
-
-      <div id="loggedin">
-
-        <h5 id="info-header" class="profile-name"></h5>
-
-        <button class="btn btn-success" onclick="track()">Top Tracks</button>
-        <button class="btn btn-success" onclick="artist()">Top Artists</button>
-      
+        </br>
+  
+        <button class="btn btn-success" onclick="allt()">All Time</button>
+        <button class="btn btn-success" onclick="six()">Last 6 Months</button>
+        <button class="btn btn-success" onclick="last()">Last Month</button>
+  
         </br>
         </br>
-
-        <button class="btn btn-success btn-sm" onclick="allt()">All Time</button>
-        <button class="btn btn-success btn-sm" onclick="six()">Last 6 Months</button>
-        <button class="btn btn-success btn-sm" onclick="last()">Last Month</button>
-
-        </br>
-        </br>
-
+  
         <div id="tracks">
           <div id="tracks-all">
             <h2>Top 20 Tracks (All Time)</h2>
@@ -66,7 +74,7 @@
             <ol id='top-tracks-last' class='list-group list-group-numbered'></ol>
           </div>
         </div>
-
+  
         <div id="artists">
           <div id="artists-all">
             <h2>Top 20 Artists (All Time)</h2>
@@ -92,8 +100,10 @@
           </dl>
           <button class="btn btn-success" id="obtain-new-token">Obtain new token using the refresh token</button>
         </div>
-
+  
+      </div>
     </div>
+    
   </body>
 </html>
 

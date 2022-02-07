@@ -31,35 +31,17 @@ function start() {
     if (access_token) {
       document.getElementById('a-token').innerHTML = access_token;
       document.getElementById('r-token').innerHTML = refresh_token;
-      $('#spinner').show();
 
-
-      $.ajax({
-          url: 'https://api.spotify.com/v1/me',
-          headers: {
-            'Authorization': 'Bearer ' + access_token
-          },
-          success: function(response) {
-            //console.log(response)
-            document.getElementById('info-header').innerHTML = 
-            `
-            <img class='cropped' src='${response['images'][0]['url']}'/>
-            <a href=${response.uri}>${response['display_name']}</a>
-            `
-            $('#login').hide();
-            $('#loggedin').show();
-            $('#tracks-all').show();
-            $('#tracks-6').hide();
-            $('#tracks-last').hide();
-            $('#artists-all').hide();
-            $('#artists-6').hide();
-            $('#artists-last').hide();
-            $('#tracks').show();
-            $('#artists').hide();
-
-
-          }
-      });
+      $('#login').hide();
+      $('#loggedin').show();
+      $('#tracks-all').show();
+      $('#tracks-6').hide();
+      $('#tracks-last').hide();
+      $('#artists-all').hide();
+      $('#artists-6').hide();
+      $('#artists-last').hide();
+      $('#tracks').show();
+      $('#artists').hide();
 
       function getTopTracks(data, id) {
         $.ajax({
@@ -83,7 +65,7 @@ function start() {
                 <div class='col col-auto'>
                   <img class='cropped-cover' src=${response['items'][i]['album']['images'][2]['url']}>
                 </div>
-                <div class='col col-auto'>
+                <div class='col col-auto textsize'>
                   <div class='ms-2 me-auto'>
                     <div class='fw-bold'>${response['items'][i]['name']}</div>
                     ${response['items'][i]['artists'][0]['name']}
