@@ -61,6 +61,6 @@ li::before {
 
 @media screen and (max-width: 767px) {
   .textsize {
-    font-size: 12px;
+    font-size: 8px;
   }
 }
