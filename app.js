@@ -15,7 +15,9 @@ var cookieParser = require('cookie-parser');
 
 var client_id = '3cb2deddfa414ebf8b418e89f9e5edae'; // Your client id
 var client_secret = 'ac5200fc0c7f4b1e93f575f1ffede5b7'; // Your secret
-var redirect_uri = 'https://warm-fjord-10849.herokuapp.com/callback'; // Your redirect uri
+//var redirect_uri = 'https://warm-fjord-10849.herokuapp.com/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+
 
 /**
  * Generates a random string containing numbers and letters
@@ -145,6 +147,6 @@ app.get('/refresh_token', function(req, res) {
 
 
 console.log('Listening on 8888');
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8888
 
 app.listen(PORT);
