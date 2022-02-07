@@ -12,7 +12,6 @@
 .cropped-cover {
   border-radius: 10%;
   object-fit: cover;
-
 }
 
 .profile-name {
@@ -49,8 +48,7 @@ li::before {
   display: inline-block;
   width: 2em;
   margin-left: -2em;
-  margin-right: -1.2em
-
+  margin-right: 0.8em;
 }
 
 @media screen and (min-width: 768px) {
@@ -61,6 +59,17 @@ li::before {
 
 @media screen and (max-width: 767px) {
   .textsize {
-    font-size: 8px;
+    font-size:12px;
+  }
+  img {
+    width:40px;
+    height:40px;
+    margin-right: -1.25em;
+  }
+  li::before {
+    display: inline-block;
+    width: 2em;
+    margin-left: -3em;
+    margin-right: -0.25em
   }
 }

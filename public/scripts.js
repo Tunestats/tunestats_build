@@ -60,12 +60,9 @@ function start() {
               <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
               <div class='row'>
                 <div class='col col-auto'>
-                  <p> </p>
-                </div>
-                <div class='col col-auto'>
                   <img class='cropped-cover' src=${response['items'][i]['album']['images'][2]['url']}>
                 </div>
-                <div class='col col-auto textsize'>
+                <div class='col col textsize'>
                   <div class='ms-2 me-auto'>
                     <div class='fw-bold'>${response['items'][i]['name']}</div>
                     ${response['items'][i]['artists'][0]['name']}
@@ -96,13 +93,13 @@ function start() {
             `
             <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
             <div class='row'>
-              <div class='col col-auto'>
+              <div class='col col-6'>
                 <p> </p>
               </div>
               <div class='col col-auto'>
                 <img class='cropped-cover' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
               </div>
-              <div class='col col-auto'>
+              <div class='col col textsize'>
                 <div class='ms-2 me-auto'>
                   <div class='fw-bold'>${response['items'][i]['name']}</div>
                 </div>
