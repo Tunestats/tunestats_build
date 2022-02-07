@@ -64,7 +64,7 @@ function start() {
                 </div>
                 <div class='col col textsize'>
                   <div class='ms-2 me-auto'>
-                    <div class='fw-bold'>${response['items'][i]['name']}</div>
+                    <div class='fw-bold'>${!(response['items'][i]['name'][38]) ? response['items'][i]['name'].substring(0,37) : response['items'][i]['name'].substring(0,37) + "..."}</div>
                     ${response['items'][i]['artists'][0]['name']}
                   </div>
                 </div>
@@ -93,13 +93,13 @@ function start() {
             `
             <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
             <div class='row'>
-              <div class='col col-6'>
+              <div class='col col-auto'>
                 <p> </p>
               </div>
               <div class='col col-auto'>
-                <img class='cropped-cover' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
+                <img class='cropped-cover num-artists' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
               </div>
-              <div class='col col textsize'>
+              <div class='col col-auto textsize'>
                 <div class='ms-2 me-auto'>
                   <div class='fw-bold'>${response['items'][i]['name']}</div>
                 </div>

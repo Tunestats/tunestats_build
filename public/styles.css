@@ -62,8 +62,8 @@ li::before {
     font-size:12px;
   }
   img {
-    width:40px;
-    height:40px;
+    width:35px;
+    height:35px;
     margin-right: -1.25em;
   }
   li::before {
@@ -71,5 +71,9 @@ li::before {
     width: 2em;
     margin-left: -3em;
     margin-right: -0.25em
+  }
+
+  .num-artists {
+    margin-left: -1.5em;
   }
 }
