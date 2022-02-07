@@ -1,4 +1,9 @@
-(function() {
+var params;
+var access_token;
+var refresh_token;
+var error;
+
+function start() {
 
   /**
    * Obtains parameters from the hash of the URL
@@ -6,28 +11,28 @@
    */
   function getHashParams() {
     var hashParams = {};
-    var e, r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
+    var e, r = /([^&;=]+)=?([^&;]*)/g
+    var q = window.location.hash.substring(1);
     while ( e = r.exec(q)) {
        hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
   }
 
-  var params = getHashParams();
-
-  var access_token = params.access_token,
-      refresh_token = params.refresh_token,
-      error = params.error;
+  params = getHashParams();
+  access_token = params.access_token
+  refresh_token = params.refresh_token
+  error = params.error;
 
   if (error) {
     alert('There was an error during the authentication');
+    //console.log(error)
   } else {
     if (access_token) {
-      var aToken = document.getElementById("a-token");
-      var rToken = document.getElementById("r-token");
-      aToken.innerHTML = access_token
-      rToken.innerHTML = refresh_token
+      document.getElementById('a-token').innerHTML = access_token;
+      document.getElementById('r-token').innerHTML = refresh_token;
+      $('#spinner').show();
+
 
       $.ajax({
           url: 'https://api.spotify.com/v1/me',
@@ -35,36 +40,106 @@
             'Authorization': 'Bearer ' + access_token
           },
           success: function(response) {
-            console.log(response)
-            var infoHeader = document.getElementById("info-header")
-            infoHeader.innerHTML += `<img class='cropped' src="${response["images"][0]["url"]}" />`
-            infoHeader.innerHTML += " " + response["display_name"]
-
+            //console.log(response)
+            document.getElementById('info-header').innerHTML = 
+            `
+            <img class='cropped' src='${response['images'][0]['url']}'/>
+            <a href=${response.uri}>${response['display_name']}</a>
+            `
             $('#login').hide();
             $('#loggedin').show();
+            $('#tracks-all').show();
+            $('#tracks-6').hide();
+            $('#tracks-last').hide();
+            $('#artists-all').hide();
+            $('#artists-6').hide();
+            $('#artists-last').hide();
+            $('#tracks').show();
+            $('#artists').hide();
+
+
           }
       });
 
-      $.ajax({
+      function getTopTracks(data, id) {
+        $.ajax({
           url: 'https://api.spotify.com/v1/me/top/tracks',
           headers: {
             'Authorization': 'Bearer ' + access_token
           },
+          data: {
+            "time_range": data
+          },
           success: function(response) {
-            console.log(response);
-            var topTracks = document.getElementById("top-tracks");
-            for (let i = 0; i < 20; i++)
-            {
-              topTracks.innerHTML += 
-              `<li onclick="location.href='${response["items"][i]['uri']}';" class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">${response["items"][i]["name"]}</div>
-                ${response["items"][i]["artists"][0]["name"]}
+            //console.log(response);
+            for (let i = 0; i < 20; i++) {
+              document.getElementById(id).innerHTML += 
+              `
+              <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
+              <div class='row'>
+                <div class='col col-auto'>
+                  <p> </p>
+                </div>
+                <div class='col col-auto'>
+                  <img class='cropped-cover' src=${response['items'][i]['album']['images'][2]['url']}>
+                </div>
+                <div class='col col-auto'>
+                  <div class='ms-2 me-auto'>
+                    <div class='fw-bold'>${response['items'][i]['name']}</div>
+                    ${response['items'][i]['artists'][0]['name']}
+                  </div>
+                </div>
               </div>
-            </li>`
+
+            </li>
+            `
             }
           }
-      });            
+        }); 
+      }
+
+      function getTopArtists(data, id) {
+        $.ajax({
+          url: 'https://api.spotify.com/v1/me/top/artists',
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          },
+          data: {
+            "time_range": data,
+          },
+          success: function(response) {
+            //console.log(response);
+            for (let i = 0; i < 20; i++) {
+              document.getElementById(id).innerHTML += 
+            `
+            <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
+            <div class='row'>
+              <div class='col col-auto'>
+                <p> </p>
+              </div>
+              <div class='col col-auto'>
+                <img class='cropped-cover' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
+              </div>
+              <div class='col col-auto'>
+                <div class='ms-2 me-auto'>
+                  <div class='fw-bold'>${response['items'][i]['name']}</div>
+                </div>
+              </div>
+            </div>
+          </li>
+          `
+            }
+          }
+        }); 
+      }
+
+      getTopTracks('long_term', 'top-tracks-all') 
+      getTopTracks('medium_term', 'top-tracks-6') 
+      getTopTracks('short_term', 'top-tracks-last') 
+      
+      getTopArtists('long_term', 'top-artists-all') 
+      getTopArtists('medium_term', 'top-artists-6') 
+      getTopArtists('short_term', 'top-artists-last') 
 
     } else {
         // render initial screen
@@ -78,13 +153,77 @@
         data: {
           'refresh_token': refresh_token
         }
-      }).done(function(data) {
-        access_token = data.access_token;
-        var aToken1 = document.getElementById("a-token");
-        var rToken1 = document.getElementById("r-token");
-        aToken1.innerHTML = access_token
-        rToken1.innerHTML = refresh_token
+      }).done(function(response) {
+        document.getElementById('a-token').innerHTML = response.access_token
+        document.getElementById('r-token').innerHTML = refresh_token;
       });
     }, false);
   }
-})();
+}
+
+function track() {
+  $('#tracks-all').show();
+  $('#tracks-6').hide();
+  $('#tracks-last').hide();
+  $('#artists-all').hide();
+  $('#artists-6').hide();
+  $('#artists-last').hide();
+  $('#tracks').show();
+  $('#artists').hide();
+}
+
+function artist() {
+  $('#tracks-all').hide();
+  $('#tracks-6').hide();
+  $('#tracks-last').hide();
+  $('#artists-all').show();
+  $('#artists-6').hide();
+  $('#artists-last').hide();
+  $('#tracks').hide();
+  $('#artists').show();
+}
+
+function allt() {
+  $('#tracks-6').hide();
+  $('#tracks-last').hide();
+  $('#artists-6').hide();
+  $('#artists-last').hide();
+  if (window.getComputedStyle(document.getElementById('tracks')).display !== 'none') {
+    $('#tracks-all').show();
+    $('#artists-all').hide();
+  }
+  else if (window.getComputedStyle(document.getElementById('artists')).display !== 'none') {
+    $('#tracks-all').hide();
+    $('#artists-all').show();
+  }
+}
+
+function six() {
+  $('#tracks-all').hide();
+  $('#tracks-last').hide();
+  $('#artists-all').hide();
+  $('#artists-last').hide();
+  if (window.getComputedStyle(document.getElementById('tracks')).display !== 'none') {
+    $('#tracks-6').show();
+    $('#artists-6').hide();
+  }
+  else if (window.getComputedStyle(document.getElementById('artists')).display !== 'none') {
+    $('#tracks-6').hide();
+    $('#artists-6').show();
+  }
+}
+
+function last() {
+  $('#tracks-all').hide();
+  $('#tracks-6').hide();
+  $('#artists-all').hide();
+  $('#artists-6').hide();
+  if (window.getComputedStyle(document.getElementById('tracks')).display !== 'none') {
+    $('#tracks-last').show();
+    $('#artists-last').hide();
+  }
+  else if (window.getComputedStyle(document.getElementById('artists')).display !== 'none') {
+    $('#tracks-all').hide();
+    $('#artists-last').show();
+  }
+}

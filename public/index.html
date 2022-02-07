@@ -4,33 +4,73 @@
     <title>Test App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
-
-    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+    <script src="scripts.js"></script>
   </head>
 
-  <body>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
-    
+  <body onload="start()">
     <div class="container-fluid">
-    </br>
-      <h1>Test App</h1>
 
-      <div id="login">
-        <a href="/login" class="btn btn-success">Log in with Spotify</a>
+      </br>
+      
+      <div id="login" class="text-center">
+        <h1>Test App</h1>
+        <a href="/login" class="btn btn-success btn-lg">Log in with Spotify</a>
       </div>
 
       <div id="loggedin">
 
         <h5 id="info-header" class="profile-name"></h5>
+
+        <button class="btn btn-success" onclick="track()">Top Tracks</button>
+        <button class="btn btn-success" onclick="artist()">Top Artists</button>
+      
+        </br>
+        </br>
+
+        <button class="btn btn-success btn-sm" onclick="allt()">All Time</button>
+        <button class="btn btn-success btn-sm" onclick="six()">Last 6 Months</button>
+        <button class="btn btn-success btn-sm" onclick="last()">Last Month</button>
+
+        </br>
+        </br>
+
+        <div id="tracks">
+          <div id="tracks-all">
+            <h2>Top 20 Tracks (All Time)</h2>
+            <ol id='top-tracks-all' class='list-group list-group-numbered'></ol>
+          </div>
   
-        <div>
-          <h2>Top 20 Tracks (All Time)</h2>
-          <ol id='top-tracks' class='list-group list-group-numbered'>
-          </ol>
+          <div id="tracks-6">
+            <h2>Top 20 Tracks (Last 6 months)</h2>
+            <ol id='top-tracks-6' class='list-group list-group-numbered'></ol>
+          </div>
+  
+          <div id="tracks-last">
+            <h2>Top 20 Tracks (Last month)</h2>
+            <ol id='top-tracks-last' class='list-group list-group-numbered'></ol>
+          </div>
         </div>
+
+        <div id="artists">
+          <div id="artists-all">
+            <h2>Top 20 Artists (All Time)</h2>
+            <ol id='top-artists-all' class='list-group list-group-numbered'></ol>
+          </div>
+          
+          <div id="artists-6">
+            <h2>Top 20 Artists (Last 6 months)</h2>
+            <ol id='top-artists-6' class='list-group list-group-numbered'></ol>
+          </div>
   
-        <div>
+          <div id="artists-last">
+            <h2>Top 20 Artists (Last Month)</h2>
+            <ol id='top-artists-last' class='list-group list-group-numbered'></ol>
+          </div>
+        </div>
+    
+        <div id="hide-this">
           <h2>oAuth info</h2>
           <dl class="dl-horizontal">
             <dt>Access token</dt><dd id='a-token' class="text-overflow"></dd>
@@ -39,12 +79,7 @@
           <button class="btn btn-success" id="obtain-new-token">Obtain new token using the refresh token</button>
         </div>
 
-      </div>
-
     </div>
-
-    <script src="scripts.js"></script>
-
   </body>
 </html>
 
