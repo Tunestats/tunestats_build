@@ -64,7 +64,9 @@ function start() {
                 </div>
                 <div class='col col textsize'>
                   <div class='ms-2 me-auto'>
-                    <div class='fw-bold'>${!(response['items'][i]['name'][38]) ? response['items'][i]['name'].substring(0,37) : response['items'][i]['name'].substring(0,37) + "..."}</div>
+                    <div class='fw-bold'>${
+                      ($(window).width() < 768) ? (!(response['items'][i]['name'][38]) ? response['items'][i]['name'].substring(0,37) : response['items'][i]['name'].substring(0,37) + "..."): response['items'][i]['name']
+                    }</div>
                     ${response['items'][i]['artists'][0]['name']}
                   </div>
                 </div>
