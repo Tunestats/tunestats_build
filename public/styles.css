@@ -1,18 +1,25 @@
-#login, #loggedin, #tracks-all, #tracks-6, #tracks-last, #tracks, #artists, #artists-all, #artists-6, #artists-last, #hide-this {
+#login,
+#loggedin,
+#tracks-all,
+#tracks-6,
+#tracks-last,
+#tracks, 
+#artists,
+#artists-all, 
+#artists-6, 
+#artists-last, 
+#hide-this, 
+#recent, 
+#main {
   display: none;
 }
 
 .cropped {
-  width: 40px; 
-  height: 40px; 
+  width: 64px; 
+  height: 64px;
   object-fit: cover;
-  border-radius: 50%;
-  }
-
-.cropped-cover {
   border-radius: 10%;
-  object-fit: cover;
-}
+  }
 
 .profile-name {
   position: fixed;
@@ -51,19 +58,19 @@ li::before {
   margin-right: 0.8em;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
   .textsize {
     font-size: 16px;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 599px) {
   .textsize {
     font-size:12px;
   }
   img {
-    width:35px;
-    height:35px;
+    width:35px !important;
+    height:35px !important;
     margin-right: -1.25em;
   }
   li::before {
@@ -77,3 +84,8 @@ li::before {
     margin-left: -1.5em;
   }
 }
+
+h2 {
+  text-align: center;
+}
+

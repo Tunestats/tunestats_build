@@ -35,13 +35,14 @@ function start() {
       $('#login').hide();
       $('#loggedin').show();
       $('#tracks-all').show();
-      $('#tracks-6').hide();
-      $('#tracks-last').hide();
-      $('#artists-all').hide();
-      $('#artists-6').hide();
-      $('#artists-last').hide();
+      //$('#tracks-6').hide();
+      //$('#tracks-last').hide();
+      //$('#artists-all').hide();
+      //$('#artists-6').hide();
+      //$('#artists-last').hide();
       $('#tracks').show();
-      $('#artists').hide();
+      $('#main').show();
+      //$('#artists').hide();
 
       function getTopTracks(data, id) {
         $.ajax({
@@ -60,12 +61,12 @@ function start() {
               <li onclick="location.href='${response['items'][i]['uri']}'" class='list-group-item d-flex align-items-start'>
               <div class='row'>
                 <div class='col col-auto'>
-                  <img class='cropped-cover' src=${response['items'][i]['album']['images'][2]['url']}>
+                  <img class='cropped' src=${response['items'][i]['album']['images'][2]['url']}>
                 </div>
                 <div class='col col textsize'>
                   <div class='ms-2 me-auto'>
                     <div class='fw-bold'>${
-                      ($(window).width() < 768) ? (!(response['items'][i]['name'][38]) ? response['items'][i]['name'].substring(0,37) : response['items'][i]['name'].substring(0,37) + "..."): response['items'][i]['name']
+                      ($(window).width() < 600) ? (!(response['items'][i]['name'][38]) ? response['items'][i]['name'].substring(0,37) : response['items'][i]['name'].substring(0,37) + "..."): response['items'][i]['name']
                     }</div>
                     ${response['items'][i]['artists'][0]['name']}
                   </div>
@@ -99,7 +100,7 @@ function start() {
                 <p> </p>
               </div>
               <div class='col col-auto'>
-                <img class='cropped-cover num-artists' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
+                <img class='cropped num-artists' src=${response['items'][i]['images'][2]['url']} height='64px' width='64px'>
               </div>
               <div class='col col-auto textsize'>
                 <div class='ms-2 me-auto'>
@@ -113,6 +114,37 @@ function start() {
           }
         }); 
       }
+
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player/recently-played',
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        },
+        success: function(response) {
+          //console.log(response);
+          for (let i = 0; i < 20; i++) {
+            document.getElementById('recent-p').innerHTML += 
+            `
+            <li onclick="location.href='${response['items'][i]['track']['uri']}'" class='list-group-item d-flex align-items-start'>
+            <div class='row'>
+              <div class='col col-auto'>
+                <img class='cropped' src=${response['items'][i]['track']['album']['images'][2]['url']}>
+              </div>
+              <div class='col col textsize'>
+                <div class='ms-2 me-auto'>
+                  <div class='fw-bold'>${
+                    ($(window).width() < 768) ? (!(response['items'][i]['track']['name'][38]) ? response['items'][i]['track']['name'].substring(0,37) : response['items'][i]['track']['name'].substring(0,37) + "..."): response['items'][i]['track']['name']
+                  }</div>
+                  ${response['items'][i]['track']['artists'][0]['name']}
+                </div>
+              </div>
+            </div>
+
+          </li>
+          `
+          }
+        }
+      }); 
 
       getTopTracks('long_term', 'top-tracks-all') 
       getTopTracks('medium_term', 'top-tracks-6') 
@@ -143,25 +175,19 @@ function start() {
 }
 
 function track() {
-  $('#tracks-all').show();
-  $('#tracks-6').hide();
-  $('#tracks-last').hide();
-  $('#artists-all').hide();
-  $('#artists-6').hide();
-  $('#artists-last').hide();
   $('#tracks').show();
+  $('#tracks-all').show();
   $('#artists').hide();
+  $('#recent').hide();
+  $('#main').show();
 }
 
 function artist() {
-  $('#tracks-all').hide();
-  $('#tracks-6').hide();
-  $('#tracks-last').hide();
-  $('#artists-all').show();
-  $('#artists-6').hide();
-  $('#artists-last').hide();
   $('#tracks').hide();
   $('#artists').show();
+  $('#artists-all').show();
+  $('#recent').hide();
+  $('#main').show();
 }
 
 function allt() {
@@ -207,4 +233,11 @@ function last() {
     $('#tracks-all').hide();
     $('#artists-last').show();
   }
+}
+
+function recent() {
+  $('#tracks').hide();
+  $('#artists').hide();
+  $('#recent').show();
+  $('#main').hide();
 }

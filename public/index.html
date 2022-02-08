@@ -50,8 +50,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" onclick="track()">Top Tracks</a>
+              <a class="nav-link" onclick="track()">Top Tracks</a>
               <a class="nav-link" onclick="artist()"href="#">Top Artists</a>
+              <a class="nav-link" onclick="recent()"href="#">Recently Played</a>
             </div>
           </div>
         </div>
@@ -60,14 +61,18 @@
       <div class="container-fluid">
       
         </br>
+
+        <div id="main" class="text-center">
+          <button class="btn btn-success btn-sm" onclick="allt()">All Time</button>
+          <button class="btn btn-success btn-sm" onclick="six()">Last 6 Months</button>
+          <button class="btn btn-success btn-sm" onclick="last()">Last Month</button>
+        </div>
   
-        <button class="btn btn-success" onclick="allt()">All Time</button>
-        <button class="btn btn-success" onclick="six()">Last 6 Months</button>
-        <button class="btn btn-success" onclick="last()">Last Month</button>
-  
-        </br>
-        </br>
-  
+        <div id="recent">
+            <h2>Recently Played</h2>
+            <ol id='recent-p' class='list-group list-group-numbered'></ol>
+        </div>
+        
         <div id="tracks">
           <div id="tracks-all">
             <h2>Top 20 Tracks (All Time)</h2>
