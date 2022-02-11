@@ -12,8 +12,8 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var client_id = '3cb2deddfa414ebf8b418e89f9e5edae'; // Your client id
-var client_secret = 'ac5200fc0c7f4b1e93f575f1ffede5b7'; // Your secret
+var client_id = 'e891e4a23a36475090f934c8d39766c7'; // Your client id
+var client_secret = 'a781ff3bcd0847ef8c603fd3f06d0d77'; // Your secret
 
 var redirect_uri = 'https://tunestats.herokuapp.com/callback'; // Your redirect uri
 //var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
