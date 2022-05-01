@@ -39,7 +39,8 @@ var app = express();
 app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
-   use(require('prerender-node').set('prerenderToken', '4HW8NOnTxmW83S8GJSCF'));
+
+app.use(require('prerender-node').set('prerenderToken', '4HW8NOnTxmW83S8GJSCF'));
 
 app.get('/login', function(req, res) {
 
