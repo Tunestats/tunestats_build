@@ -36,11 +36,11 @@ var stateKey = 'spotify_auth_state';
 
 var app = express();
 
+app.use(require('prerender-node').set('prerenderToken', '4HW8NOnTxmW83S8GJSCF'));
+
 app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
-
-app.use(require('prerender-node').set('prerenderToken', '4HW8NOnTxmW83S8GJSCF'));
 
 app.get('/login', function(req, res) {
 
