@@ -12,6 +12,7 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var compression = require('compression');
 var client_id = 'e891e4a23a36475090f934c8d39766c7'; // Your client id
 var client_secret = '0fddb8e02e644b7db8c81a5bcc931921'; // Your secret
 
@@ -41,6 +42,8 @@ app.use(require('prerender-node').set('prerenderToken', '4HW8NOnTxmW83S8GJSCF'))
 app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
+
+app.use(compression());
 
 app.get('/login', function(req, res) {
 
