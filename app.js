@@ -13,8 +13,8 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var compression = require('compression');
-var client_id = 'e891e4a23a36475090f934c8d39766c7'; // Your client id
-var client_secret = '0fddb8e02e644b7db8c81a5bcc931921'; // Your secret
+var client_id = process.env.SPOTIFY_ID; // Your client id
+var client_secret = process.env.SPOTIFY_SECRET; // Your secret
 
 var redirect_uri = 'https://tunestats.herokuapp.com/callback'; // Your redirect uri
 
